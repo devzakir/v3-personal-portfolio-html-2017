@@ -7,7 +7,7 @@ $colorBlack : #222;
 $colorLightBlack: #444;
 
 // Fonts
-$font1 : 'Ubuntu',
+$font1 : "'Poppins', sans-serif"
 sans-serif;
 $font2 : 'Open Sans',
 sans-serif;
@@ -115,7 +115,7 @@ h6 {
 
 .buttons{
     margin-top: 45px;
-    a{
+    button, a{
         padding: 10px 25px;
         border-radius: 5px;
         color: darken($colorWhite, 5%);
@@ -125,9 +125,22 @@ h6 {
             background-color: $colorMain;
             background-image: linear-gradient(to right, #4c80f1 , #245cd1);
         }
-        &:hover{                    
+        &:hover{
             box-shadow: 0px 5px 10px 1px #ccc;
             color: $colorWhite;
+        }
+    }
+    button {
+        border: 0;
+        cursor: pointer;
+        &[disabled="disabled"]{
+            cursor: default;
+            background-color: #ccc;
+            background-image: linear-gradient(to right, #d3d3d3 , #acacac);
+            color: gray;
+            &:hover{
+                box-shadow: 0px 0px #ccc;
+            }
         }
     }
 }
@@ -135,30 +148,29 @@ h6 {
 
 
 /* header section */
-#app {
-    & > header {
-        background-color: $colorMain;
-        .menu-part{
+header.active {
+    background-color: $colorMain;
+    .menu-part{
+        li {
+            a {
+                color: $colorWhite;
+            }
+        }
+        .right {
             li {
                 a {
-                    color: $colorWhite;
-                }
-            }
-            .right {
-                li {
-                    a {
-                        &.hire-me {
-                            border: 1px solid #fff;
-                            &:hover{
-                                background-color: $colorWhite;
-                                color: $colorMain;
-                            }
+                    font-weight: 400;
+                    &.hire-me {
+                        border: 1px solid #fff;
+                        &:hover{
+                            background-color: $colorWhite;
+                            color: $colorMain;
                         }
                     }
                 }
             }
-            
-        }
+        } 
+
     }
 }
 
@@ -206,6 +218,9 @@ header{
                 }
             }
         }
+        li.nav-toggle {
+            display: none;
+        }
         .right {
             li {
                 a {
@@ -225,12 +240,16 @@ header{
 
 .banner-section{
     position: relative;
+    background-image: url('../../images/background.png');
+    background-position: top right;
+    background-repeat: no-repeat;
+    background-size: cover;
     header{
         // background-color: #245cd1;
         position: absolute;
         top: 0;
         width: 100%;
-        z-index: 999;
+        z-index: 99;
     }
     // &:before{
     //     content: "";
@@ -239,7 +258,7 @@ header{
     //     width: 100%;
     //     height: 100%;
     //     bottom: calc(100% - 200px);
-    //     transform: skewY(-7deg);
+    //     transform: skewY(7deg);
     //     background: $colorMain;
     // }
     .particle {
@@ -276,17 +295,17 @@ header{
             font-size: 45px;
         }
         h5{
-            font-size: 20px;
+            font-size: 22px;
         }
         p{
             max-width: 350px;
-            margin-top: 15px;
+            font-size: 16px;
+            margin-top: 16px;
         }
     }
     .banner-img{
-        margin-right: -200px;
-        margin-left: -150px;           
-        position: relative;
+        // margin-right: -100px;
+        // margin-left: -60px;
         z-index: -1;
     }
 }
@@ -320,8 +339,33 @@ header{
         max-width: 400px;
         overflow: hidden;
         box-shadow: 10px 15px 30px 1px #ddd;
+        min-height: 500px;
+        img {
+            height: auto;
+            width: auto;
+            min-height: 500px;
+            min-width: 100%;
+            object-fit: cover;
+        }
+    }
+    .heading {
+        text-align: right;
+        padding-right: 15px;
+        color: #626264;
+        margin-bottom: 50px;
+        display: inline-block;
+        // border-bottom: 5px solid lighten($colorLightBlack, 60%);
+        color: $colorMain;
+        h2{
+            margin: 0;
+        }
     }
     .about-me{
+        .about-data {
+            p{
+                margin-bottom: 10px;
+            }
+        }
         .tabs{
             border-bottom: 1px solid #eee;
             li{
@@ -408,6 +452,10 @@ header{
     }
 }
 
+.about-section.active {
+    overflow: hidden;
+}
+
 
 .services-section{
     min-height: 600px;
@@ -482,27 +530,27 @@ header{
                         margin: 10px auto 45px;
                     }
                 }
-                &1{
+                &:nth-child(1){
                     .item-info{
                         background-color: #E8F0FF;
                         color: #448AFF;
                     }
                 }
-                &2{
+                &:nth-child(2){
                     margin-top: 80px;
                     .item-info{
                         background-color: #FFF5EE;
                         color: #FF9B53;
                     }
                 }
-                &3{
+                &:nth-child(3){
                     margin-top: -80px;
                     .item-info{
                         background-color: #E6FAF1;
                         color: #06D79C;
                     }
                 }
-                &4{
+                &:nth-child(4){
                     .item-info{
                         background-color: #EEEBFF;
                         color: #543BCC;
@@ -620,8 +668,24 @@ header{
 }
 
 .testiomonial-section{
-    background-color: $colorMain;
+    // background-color: $colorMain;
     padding: 100px 0;
+    background-image: url('../../images/testimonial.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    z-index: 1;
+    &::after {
+        position: absolute;
+        content: '';
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba($colorMain, $alpha: 0.92);
+        z-index: -1;
+    }
     .section-heading{
         margin-bottom: 45px;
         color: $colorWhite;
@@ -634,7 +698,7 @@ header{
         margin-bottom: -10px;
     }
     .item{
-        max-width: 700px;
+        max-width: 800px;
         background-color: $colorWhite;
         padding: 30px 30px 30px;
         border-radius: 5px;
@@ -731,6 +795,9 @@ header{
             &:focus{
                 border-color: $colorMain;
             }
+            &.is-invalid {
+                border-color: #ff3a4b;
+            }
         }
         button.send-message{
             padding: 10px 25px;
@@ -774,6 +841,7 @@ header{
                     border-radius: 2px;
                     color: $colorWhite;
                     background-color: lighten($colorMain, 15%);
+                    margin-right: 5px;
                 }
             }
         }
@@ -808,6 +876,234 @@ header{
         a{
             color: $colorOptional;
         }
+    }
+}
+
+// Product Section
+.products {
+    padding: 100px 0 120px;
+    background-color: $colorWhite;
+    .heading{
+        // color: $colorMain;
+        // h2{
+        //     color: $colorMain;
+        //     margin: 0;
+        // }
+        // p{
+        //     max-width: 300px;
+        //     margin: auto;
+        //     color: $colorLightBlack;
+        // }  
+        
+        text-align: right;
+        padding-right: 15px;
+        color: #626264;
+        margin-bottom: 50px;
+        border-right: 5px solid lighten($colorLightBlack, 60%);
+        color: $colorMain;
+        h2{
+            margin: 0;
+        }
+    }
+
+    .product-box {
+        // box-shadow: 0px 1px 2px 0px rgba(128, 128, 128, 0.5);
+        box-shadow: 2px 2px 20px 0 rgba(0, 0, 0, 0.1);
+        border-radius: 6px;
+        overflow: hidden;
+        margin-bottom: 30px;
+        @include animate();
+        .image {
+            height: 300px;
+            img {
+                object-fit: cover;
+                height: 100%;
+            }
+        }
+        .info {
+            padding: 20px 30px;
+            .title {
+                a {
+                    font-size: 16px;
+                    font-weight: 600;
+                    // margin: x;
+                }
+                p {
+                    margin: 0;
+                    font-size: 13px;
+                    color: #666;
+                }
+            }
+            .price {
+                p {
+                    margin: 0;
+                    padding: 1px 15px;
+                    background-color: $colorMain;
+                    color: $colorWhite;
+                    border-radius: 3px;
+                    font-size: 12px;
+                }
+            }
+            &-footer {    
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-top: 10px;
+            }
+        }
+        &:hover {
+            // box-shadow: 0px 2px 5px 2px rgba(128, 128, 128, 0.3);
+            box-shadow: 2px 2px 20px 0 rgba(0, 0, 0, 0.3);
+        }
+    }
+}
+
+
+// Breadcum 
+section.breadcrum {
+    text-align: center;
+    padding: 100px;
+    background-image: url('../../images/banner3.jpg');
+    background-size: cover;
+    background-position: top center;
+    background-repeat: no-repeat;
+    position: relative;
+    z-index: 1;
+    &::after {
+        position: absolute;
+        content: '';
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        // background-color: rgba(lighten($colorOptional, 50%), $alpha: 0.3);
+        z-index: -1;
+    }
+    .heading {
+        h2 {
+            font-weight: 700;
+        }
+        a {
+            font-size: 14px;
+            text-transform: uppercase;
+            font-weight: 600;
+            color: #444;
+        }
+        i {
+            margin-left: 8px;
+            margin-right: 8px;
+            font-size: 14px;
+            color: #444;
+        }
+    }
+
+}
+
+// Single Product Details Page
+section.single-product {
+    padding: 100px 0;
+    .product-image {
+        padding: 10px;
+        border: 1px solid #ddd;
+    }
+    .description {
+        margin-top: 30px;
+        padding: 10px;
+        border: 1px solid #ddd;
+    }
+    .template-box {
+        border: 1px solid #ddd;
+        border-radius: 3px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 200px;
+        margin-bottom: 20px;
+        a {
+            margin-bottom: 10px;
+            text-align: center;
+            color: white;
+            background-color: $colorMain;
+            text-transform: uppercase;
+            min-width: 180px;
+            padding: 10px 0;
+            border-radius: 3px;
+            font-weight: 600;
+            i {
+                margin-right: 5px;
+            }
+            &.demo {
+                background-color: $colorOptional;
+                color: $colorBlack;
+            }
+            &:hover{
+                box-shadow: 0px 2px 4px 0px rgba(14, 27, 56, 0.4);
+            }
+        }
+    }
+    .sidebar-box{
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 3px;
+        h3 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        .content {
+            table {
+                width: 100%;
+                border: 1px solid #ddd;
+                tr{
+                    border-bottom: 1px solid #ddd;
+                    td {
+                        &:first-child{
+                            width: 40%;
+                        }
+                        width: 60%;
+                        padding: 7px 10px;
+                        font-size: 14px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+// 404 page
+section.not-found {
+    padding: 160px 0;
+}
+
+#hireMe {
+    // display: block;
+    z-index: 100;
+    &:after {
+        position: absolute;
+        content: '';
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+    .modal-header{
+        button {
+            border: 0;
+            background: transparent;
+            font-size: 24px;
+            /* height: auto; */
+            line-height: 24px;
+            outline: 0;
+            cursor: pointer;
+        }
+    }
+    .modal-content {
+        overflow: auto;
+        max-height: calc(100vh - 60px);
     }
 }
 @import 'responsive';
